@@ -1,0 +1,52 @@
+{
+  "name": "amada",
+  "description": "PDF and screenshot generation in Nodejs",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raminjafary/amada"
+  },
+  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "author": "<raminjafary1993@gmail.com>",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "dev": "yarn build:styles && ts-node -P playground/tsconfig.json playground/server.ts",
+    "lint": "eslint --ext .ts,.js,.json .",
+    "lint:fix": "yarn lint --fix",
+    "prepublish": "yarn build",
+    "test": "jest",
+    "build:styles": "sass --no-source-map playground/public",
+    "test:report": "yarn test --coverageReporters=text-summary"
+  },
+  "dependencies": {
+    "playwright": "^1.7.0",
+    "sass": "^1.30.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^14.11.10",
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "eslint": "^7.11.0",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.0",
+    "husky": "^4.3.0",
+    "jest": "^26.6.1",
+    "lint-staged": "^10.4.2",
+    "prettier": "^2.2.1",
+    "ts-jest": "^26.4.1",
+    "ts-node": "^9.1.1",
+    "tsc": "^1.20150623.0",
+    "typescript": "^4.0.3"
+  }
+}

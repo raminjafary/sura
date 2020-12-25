@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "outDir": "dist",
+    "declaration": true,
+    "baseUrl": ".",
+    "types": ["@types/node", "@types/jest"]
+  },
+  "include": ["src"],
+  "exclude": ["/**node_modules", "**/.*/", "dist"]
+}
