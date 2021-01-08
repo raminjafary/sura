@@ -1,5 +1,5 @@
 # Sura
-> PDF and screenshot generator using Node and Playwright
+> Generate PDF or screenshot with Node and Playwright.
 
 ## Usage
 coming soon!

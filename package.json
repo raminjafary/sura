@@ -1,16 +1,15 @@
 {
-  "name": "amada",
-  "description": "PDF and screenshot generation in Nodejs",
+  "name": "sura",
+  "description": "Generate PDF or screenshot with Node and Playwright",
   "version": "0.1.0",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/raminjafary/amada"
+    "url": "git+https://github.com/raminjafary/sura"
   },
-  "typings": "dist/index.d.ts",
   "main": "dist/index.js",
-  "author": "<raminjafary1993@gmail.com>",
   "types": "dist/index.d.ts",
+  "author": "<raminjafary1993@gmail.com>",
   "files": [
     "dist/*.js",
     "dist/*.d.ts"
