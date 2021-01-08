@@ -1,4 +1,6 @@
 # Sura
+[![npm (scoped with tag)](https://img.shields.io/npm/v/@raminjafary/sura/latest)](https://www.npmjs.com/package/@raminjafary/sura)
+
 > Generate PDF or screenshot with Node and Playwright.
 
 ## Installation
@@ -77,4 +79,4 @@ const { data, fsPath } = await generateFile({
 
 ## License
 
-MIT
+[MIT](./LICENSE)
