@@ -1,106 +1,102 @@
-import path from 'path'
-import { chromium } from 'playwright'
+import { chromium, Page } from 'playwright'
 //@ts-expect-error missing types
 import sass from 'sass'
 
-export interface PDFOutput {
-  pdf: Buffer
+export interface FileOutput {
+  data: Buffer | string
   fsPath: string | undefined
 }
 
-export interface PDFOptions {
-  style?: StyleOptions
-  fsPath?: string
-  waitUntil?: 'domcontentloaded' | 'load' | 'networkidle' | undefined
+type Parameters<T> = T extends (...args: infer T) => any ? T : never
+export interface FileOptions {
+  type: 'screenshot' | 'pdf'
   htmlPath?: string
-  format?: string
-  printBackground?: boolean
-  headerTemplate?: string
-  footerTemplate?: string
-  displayHeaderFooter?: boolean
+  stylePath?: string
+  pdf?: Parameters<Page['pdf']>[0]
+  screenshot?: Parameters<Page['screenshot']>[0]
+  pageLoad?: Parameters<Page['goto']>[1]
 }
 
-export interface StyleOptions {
-  file?: string | undefined
-  outputStyle?: 'expanded' | 'compressed' | 'nested' | 'compact'
-}
+export async function generateFile(options: FileOptions): Promise<FileOutput> {
+  const {
+    type = 'pdf',
+    htmlPath,
+    stylePath,
+    pdf,
+    screenshot,
+    pageLoad,
+  } = options
 
-export function generatePDF(options: PDFOptions): Promise<PDFOutput>
+  if (!htmlPath) {
+    throw new Error('htmlPath is not defined!')
+  }
 
-export async function generatePDF({
-  fsPath = undefined,
-  htmlPath = path.join(__dirname, '..', 'public', 'index.html'),
-  format = 'A4',
-  waitUntil = 'networkidle',
-  style = {} as StyleOptions,
-  printBackground = false,
-  displayHeaderFooter = true,
-  headerTemplate = `
-    <div style="font-size:7px;white-space:nowrap;margin-left:40px;">
-        ${new Date().toDateString()}
-        <span class="title" style="margin-left: 10px;"></span>
-    </div>
-`,
-  footerTemplate = `
-    <div style="font-size:6px;white-space:nowrap;margin-left:40px;width:100%;">
-        <span style="display:inline-block;float:right;margin-right:10px;">
-            <span class="pageNumber"></span> / <span class="totalPages"></span>
-        </span>
-    </div>`,
-}: PDFOptions): Promise<PDFOutput> {
   const browser = await chromium.launch({
     headless: true,
     args: ['--disable-dev-shm-usage'],
   })
 
-  const page = await browser.newPage()
+  const page = await browser.newPage({ viewport: null })
 
-  await page.goto(`file:${htmlPath}`, {
-    waitUntil,
-  })
+  await page.goto(htmlPath, pageLoad)
 
-  await page.addStyleTag({
-    content: `
-        ${renderSass(style)}
-        `,
-  })
+  if (stylePath) {
+    await page.addStyleTag({
+      content: `
+          ${renderStyle(stylePath)}
+          `,
+    })
+  }
 
-  await page.emulateMedia({ media: 'print' })
-
-  const pdf = await page.pdf({
-    format,
-    path: fsPath,
-    printBackground,
-    displayHeaderFooter,
-    headerTemplate,
-    footerTemplate,
-    margin: {
-      top: '40px',
-      right: '40px',
-      bottom: '40px',
-      left: '40px',
-    },
-  })
+  const data = await genreateFileWithyType(type, page, pdf, screenshot)
 
   await browser.close()
 
+  const savedPath = screenshot?.path || pdf?.path || undefined
+
   return {
-    pdf,
-    fsPath,
+    data,
+    fsPath: savedPath,
   }
 }
 
-function renderSass(options: StyleOptions): Buffer
+async function generatePDF(page: Page, pdf: FileOptions['pdf']) {
+  await page.emulateMedia({ media: 'print' })
+  return page.pdf(pdf)
+}
 
-function renderSass({
-  file = undefined,
-  outputStyle = 'compressed',
-}: StyleOptions) {
+async function takeScreenshot(
+  page: Page,
+  screenshot: FileOptions['screenshot']
+) {
+  return page.screenshot(screenshot)
+}
+
+async function genreateFileWithyType(
+  type: FileOptions['type'],
+  page: Page,
+  pdf: FileOptions['pdf'],
+  screenshot: FileOptions['screenshot']
+) {
+  let data: string | Buffer = ''
+
+  if (type === 'pdf') {
+    await generatePDF(page, pdf)
+  }
+
+  if (type === 'screenshot' && screenshot) {
+    data = (await takeScreenshot(page, screenshot)).toString('base64')
+  }
+  return data
+}
+
+function renderStyle(file: string) {
   if (file) {
     const compiledStyles = sass.renderSync({
       file,
-      outputStyle: outputStyle,
+      outputStyle: 'compressed',
     })
     return compiledStyles.css
   }
+  return ''
 }
