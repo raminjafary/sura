@@ -1,7 +1,8 @@
 import http, { ServerResponse } from 'http'
 import fs from 'fs'
-import { generatePDF } from '../src/index'
+import { generateFile } from '../src/index'
 import path from 'path'
+import { exec } from 'child_process'
 
 const host = 'localhost'
 const port = 3000
@@ -41,13 +42,13 @@ function serveFiles(filePath: string, res: ServerResponse, mimeType: string) {
   fs.access(filePath, function access(error) {
     if (!error) {
       if (!['text/html', 'application/pdf'].includes(mimeType)) {
-        const fileStram = fs.createReadStream(
+        const fileStream = fs.createReadStream(
           filePath,
           mimeType === 'text/css' ? 'UTF-8' : undefined
         )
         res.setHeader('Content-Type', mimeType)
         res.writeHead(200)
-        fileStram.pipe(res)
+        fileStream.pipe(res)
       } else {
         fs.readFile(filePath, (error, data) => {
           if (error) {
@@ -69,33 +70,95 @@ function serveFiles(filePath: string, res: ServerResponse, mimeType: string) {
 }
 
 const server = http.createServer(async function reqHandler(req, res) {
-  let pdfPath = ''
+  let outputPath = ''
 
   if (req.url === '/pdf') {
-    const { fsPath } = await generatePDF({
-      fsPath: path.join(__dirname, 'files', new Date().getTime() + '.pdf'),
-      htmlPath: path.join(__dirname, 'public', 'card.html'),
-      style: {
-        file: path.join(__dirname, 'public', 'assets', 'style', 'style.scss'),
+    const { fsPath } = await generateFile({
+      type: 'pdf',
+      htmlPath: 'http://localhost:3000/card',
+      stylePath: path.join(
+        __dirname,
+        'public',
+        'assets',
+        'style',
+        'style.scss'
+      ),
+      pageLoad: {
+        waitUntil: 'networkidle',
+      },
+      pdf: {
+        path: path.join(__dirname, 'files', new Date().getTime() + '.pdf'),
+        margin: {
+          top: '40px',
+          right: '40px',
+          bottom: '40px',
+          left: '40px',
+        },
+        format: 'A4',
+        printBackground: false,
+        displayHeaderFooter: true,
+        headerTemplate: `
+      <div style="font-size:7px;white-space:nowrap;margin-left:40px;">
+          ${new Date().toDateString()}
+          <span class="title" style="margin-left: 10px;"></span>
+      </div>
+  `,
+        footerTemplate: `
+      <div style="font-size:6px;white-space:nowrap;margin-left:40px;width:100%;">
+          <span style="display:inline-block;float:right;margin-right:10px;">
+              <span class="pageNumber"></span> / <span class="totalPages"></span>
+          </span>
+      </div>`,
       },
     })
 
-    pdfPath = fsPath!
+    outputPath = fsPath!
+  }
+
+  if (req.url === '/screenshot') {
+    const { fsPath } = await generateFile({
+      type: 'screenshot',
+      htmlPath: 'http://localhost:3000/card',
+      screenshot: {
+        path: path.join(
+          __dirname,
+          'screenshots',
+          new Date().getTime() + '.png'
+        ),
+        fullPage: true,
+      },
+    })
+
+    outputPath = fsPath!
   }
 
   if (req.url) {
     const url = req.url === '/' ? req.url + '/index.html' : req.url
     const { ext } = path.parse(url)
     const filename = !ext ? url + '.html' : url
-    const filePath = pdfPath || path.join(__dirname, 'public', filename)
+    const filePath = outputPath || path.join(__dirname, 'public', filename)
     serveFiles(
       filePath,
       res,
-      getMimeType(getFileExtension(pdfPath || filename))
+      getMimeType(getFileExtension(outputPath || filename))
     )
   }
 })
 
 server.listen(port, host, function listen() {
   console.log(`Server is running on http://${host}:${port}`)
+  exec(
+    process.platform === 'linux'
+      ? `google-chrome http://${host}:${port}`
+      : process.platform === 'darwin'
+      ? `open -a chrome http://${host}:${port}`
+      : `start chrome http://${host}:${port}`, //process.platform === 'win32' || process.platform === 'win64'
+    (error, stdout, stderr) => {
+      if (error) {
+        console.error(`exec error: ${error}`)
+        return
+      }
+      console.log(stdout)
+    }
+  )
 })
