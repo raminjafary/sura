@@ -48,7 +48,7 @@ export async function generateFile(options: FileOptions): Promise<FileOutput> {
     })
   }
 
-  const data = await genreateFileWithyType(type, page, pdf, screenshot)
+  const data = await genreateFileWithType(type, page, pdf, screenshot)
 
   await browser.close()
 
@@ -72,7 +72,7 @@ async function takeScreenshot(
   return page.screenshot(screenshot)
 }
 
-async function genreateFileWithyType(
+async function genreateFileWithType(
   type: FileOptions['type'],
   page: Page,
   pdf: FileOptions['pdf'],
