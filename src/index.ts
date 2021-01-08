@@ -1,8 +1,6 @@
 import { chromium, Page } from 'playwright'
-//@ts-expect-error missing types
 import sass from 'sass'
-
-export interface FileOutput {
+interface FileOutput {
   data: Buffer | string
   fsPath: string | undefined
 }
