@@ -6,9 +6,9 @@
 ## Installation
 
 ```bash
-npm i sura
+npm i @raminjafary/sura
 # or
-yarn add sura
+yarn add @raminjafary/sura
 ```
 ## Features
 * Generate PDF
