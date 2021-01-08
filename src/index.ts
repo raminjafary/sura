@@ -1,15 +1,17 @@
 import { chromium, Page } from 'playwright'
 import sass from 'sass'
+
 interface FileOutput {
   data: Buffer | string
   fsPath: string | undefined
 }
 
 type Parameters<T> = T extends (...args: infer T) => any ? T : never
+
 export interface FileOptions {
   type: 'screenshot' | 'pdf'
-  htmlPath?: string
-  stylePath?: string
+  htmlPath?: string | undefined
+  stylePath?: string | undefined
   pdf?: Parameters<Page['pdf']>[0]
   screenshot?: Parameters<Page['screenshot']>[0]
   pageLoad?: Parameters<Page['goto']>[1]
@@ -18,8 +20,8 @@ export interface FileOptions {
 export async function generateFile(options: FileOptions): Promise<FileOutput> {
   const {
     type = 'pdf',
-    htmlPath,
-    stylePath,
+    htmlPath = undefined,
+    stylePath = undefined,
     pdf,
     screenshot,
     pageLoad,
