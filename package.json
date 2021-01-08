@@ -1,5 +1,5 @@
 {
-  "name": "sura",
+  "name": "@raminjafary/sura",
   "description": "Generate PDF or screenshot with Node and Playwright",
   "version": "0.1.0",
   "license": "MIT",
@@ -28,6 +28,9 @@
   "dependencies": {
     "playwright": "^1.7.0",
     "sass": "^1.32.2"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "@commitlint/cli": "11.0.0",
