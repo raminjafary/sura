@@ -2,13 +2,12 @@ import http, { ServerResponse } from 'http'
 import path from 'path'
 import { exec } from 'child_process'
 import fs from 'fs'
-/// <reference path='../dist/index.d.ts' />
 import { generateFile } from '../dist'
 
 const host = 'localhost'
 const port = 3000
 
-export type MimeTypes =
+export type Extensions =
   | '.html'
   | '.css'
   | '.js'
@@ -19,7 +18,7 @@ export type MimeTypes =
   | '.ttf'
   | '.pdf'
 
-const extensions = {
+const mimeTypes = {
   '.html': 'text/html',
   '.css': 'text/css',
   '.js': 'application/javascript',
@@ -31,12 +30,12 @@ const extensions = {
   '.pdf': 'application/pdf',
 }
 
-function getMimeType(ext: MimeTypes) {
-  return extensions[ext]
+function getMimeType(ext: Extensions) {
+  return mimeTypes[ext]
 }
 
-function getFileExtension(filename: string): MimeTypes {
-  return path.extname(filename) as MimeTypes
+function getFileExtension(filename: string) {
+  return path.extname(filename) as Extensions
 }
 
 function serveFiles(filePath: string, res: ServerResponse, mimeType: string) {
