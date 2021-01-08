@@ -1,8 +1,9 @@
 import http, { ServerResponse } from 'http'
-import fs from 'fs'
-import { generateFile } from '../src/index'
 import path from 'path'
 import { exec } from 'child_process'
+import fs from 'fs'
+/// <reference path='../dist/index.d.ts' />
+import { generateFile } from '../dist'
 
 const host = 'localhost'
 const port = 3000
