@@ -65,7 +65,7 @@ async function generatePDF(page: Page, pdf: FileOptions['pdf']) {
   return page.pdf(pdf)
 }
 
-async function takeScreenshot(
+function takeScreenshot(
   page: Page,
   screenshot: FileOptions['screenshot']
 ) {
