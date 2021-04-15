@@ -12,8 +12,8 @@
   "extends": [
     "plugin:@typescript-eslint/recommended",
      "plugin:prettier/recommended",
-      "prettier",
-      "prettier/@typescript-eslint"
+     "eslint-config-prettier",
+     "prettier"
     ],
   "plugins": [
      "@typescript-eslint",
