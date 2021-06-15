@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "playwright": "^1.10.0",
-    "sass": "^1.32.13"
+    "sass": "^1.35.0"
   },
   "publishConfig": {
     "access": "public"
@@ -36,22 +36,22 @@
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@types/jest": "^26.0.22",
-    "@types/node": "^15.3.0",
+    "@types/node": "^15.12.2",
     "@types/sass": "^1.16.0",
-    "@typescript-eslint/eslint-plugin": "^4.23.0",
-    "@typescript-eslint/parser": "^4.23.0",
-    "eslint": "^7.26.0",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.2.0",
-    "eslint-plugin-import": "^2.23.2",
+    "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^6.0.0",
-    "jest": "^26.6.3",
+    "jest": "^27.0.4",
     "lint-staged": "^11.0.0",
-    "prettier": "^2.3.0",
+    "prettier": "^2.3.1",
     "standard-version": "^9.2.0",
-    "ts-jest": "^26.5.4",
-    "ts-node": "^9.1.1",
+    "ts-jest": "^27.0.3",
+    "ts-node": "^10.0.0",
     "tsc": "^2.0.0",
-    "typescript": "^4.2.4"
+    "typescript": "^4.3.2"
   }
 }
