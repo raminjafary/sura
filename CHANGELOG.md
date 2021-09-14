@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/raminjafary/sura/compare/v0.1.2...v0.1.3) (2021-09-14)
+
+
+### Features
+
+* update dependencies ([6519b65](https://github.com/raminjafary/sura/commit/6519b65b4553616613e4ff8f3347ca8561d3ac61))
+
 ### [0.1.2](https://github.com/raminjafary/sura/compare/v0.1.1...v0.1.2) (2021-04-15)
 
 

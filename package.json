@@ -1,7 +1,7 @@
 {
   "name": "@raminjafary/sura",
   "description": "Generate PDF or screenshot with Node and Playwright",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "repository": {
     "type": "git",
