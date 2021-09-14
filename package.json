@@ -26,8 +26,8 @@
     "release": "standard-version $* && git push --follow-tags && npm publish"
   },
   "dependencies": {
-    "playwright": "^1.10.0",
-    "sass": "^1.35.0"
+    "playwright": "^1.14.1",
+    "sass": "^1.40.0"
   },
   "publishConfig": {
     "access": "public"
@@ -35,23 +35,23 @@
   "devDependencies": {
     "@commitlint/cli": "^13.0.0",
     "@commitlint/config-conventional": "^13.0.0",
-    "@types/jest": "^27.0.0",
-    "@types/node": "^15.12.2",
-    "@types/sass": "^1.16.0",
-    "@typescript-eslint/eslint-plugin": "^4.27.0",
-    "@typescript-eslint/parser": "^4.27.0",
-    "eslint": "^7.28.0",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.9.1",
+    "@types/sass": "^1.16.1",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.2.0",
-    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^7.0.0",
-    "jest": "^27.0.4",
-    "lint-staged": "^11.0.0",
-    "prettier": "^2.3.1",
-    "standard-version": "^9.2.0",
-    "ts-jest": "^27.0.3",
-    "ts-node": "^10.0.0",
+    "husky": "^7.0.2",
+    "jest": "^27.2.0",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.4.0",
+    "standard-version": "^9.3.1",
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1",
     "tsc": "^2.0.0",
-    "typescript": "^4.3.2"
+    "typescript": "^4.4.3"
   }
 }
