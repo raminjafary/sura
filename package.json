@@ -23,7 +23,7 @@
     "test": "jest",
     "build:styles": "sass --no-source-map playground/public",
     "test:report": "yarn test --coverageReporters=text-summary",
-    "release": "standard-version $* && git push --follow-tags && npm publish"
+    "release": "standard-version $* && git push --follow-tags"
   },
   "dependencies": {
     "playwright": "^1.14.1",
