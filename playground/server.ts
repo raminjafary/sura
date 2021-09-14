@@ -42,10 +42,7 @@ function serveFiles(filePath: string, res: ServerResponse, mimeType: string) {
   fs.access(filePath, function access(error) {
     if (!error) {
       if (!['text/html', 'application/pdf'].includes(mimeType)) {
-        const fileStream = fs.createReadStream(
-          filePath,
-          mimeType === 'text/css' ? 'UTF-8' : undefined
-        )
+        const fileStream = fs.createReadStream(filePath)
         res.setHeader('Content-Type', mimeType)
         res.writeHead(200)
         fileStream.pipe(res)
