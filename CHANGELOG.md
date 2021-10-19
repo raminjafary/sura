@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/raminjafary/sura/compare/v0.1.3...v0.1.4) (2021-10-19)
+
+
+### Bug Fixes
+
+* **playground:** remove mime type readstream ([2b4fea2](https://github.com/raminjafary/sura/commit/2b4fea2ec228722d84a7dfdda199c6674c242adc))
+* support esm module interop ([394b3e4](https://github.com/raminjafary/sura/commit/394b3e40819a5cf92d10a57910db248bf45add5e))
+
 ### [0.1.3](https://github.com/raminjafary/sura/compare/v0.1.2...v0.1.3) (2021-09-14)
 
 
