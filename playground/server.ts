@@ -2,7 +2,11 @@ import http, { ServerResponse } from 'http'
 import path from 'path'
 import { exec } from 'child_process'
 import fs from 'fs'
-import { generateFile } from '../dist'
+import { generateFile } from '../dist/index.js'
+
+import { fileURLToPath } from 'url'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const host = 'localhost'
 const port = 3000
