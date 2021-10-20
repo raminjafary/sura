@@ -78,7 +78,7 @@ async function genreateFileWithType(
   let data: string | Buffer = ''
 
   if (type === 'pdf') {
-    await generatePDF(page, pdf)
+    data = await generatePDF(page, pdf)
   }
 
   if (type === 'screenshot' && screenshot) {
