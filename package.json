@@ -8,6 +8,9 @@
     "type": "git",
     "url": "git+https://github.com/raminjafary/sura"
   },
+  "bin": {
+    "sura": "bin/index.js"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "<raminjafary1993@gmail.com>",
