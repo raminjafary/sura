@@ -16,6 +16,7 @@
     "dist/*.d.ts"
   ],
   "scripts": {
+    "prepare": "husky install",
     "build": "rm -rf dist && tsc",
     "dev": "yarn build && yarn build:styles && node --loader ts-node/esm ./playground/server.ts --extension ts",
     "lint": "eslint --ext .ts,.js,.json .",
@@ -27,32 +28,32 @@
     "release": "standard-version $* && git push --follow-tags"
   },
   "dependencies": {
-    "playwright": "^1.14.1",
-    "sass": "^1.40.0"
+    "playwright": "^1.16.3",
+    "sass": "^1.43.4"
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
-    "@commitlint/cli": "^13.0.0",
-    "@commitlint/config-conventional": "^13.0.0",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.9.1",
-    "@types/sass": "^1.16.1",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
-    "eslint": "^7.32.0",
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.7",
+    "@types/sass": "^1.43.0",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.2.0",
-    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^7.0.2",
-    "jest": "^27.2.0",
-    "lint-staged": "^11.1.2",
-    "prettier": "^2.4.0",
-    "standard-version": "^9.3.1",
-    "ts-jest": "^27.0.5",
-    "ts-node": "^10.2.1",
+    "husky": "^7.0.4",
+    "jest": "^27.3.1",
+    "lint-staged": "^11.2.6",
+    "prettier": "^2.4.1",
+    "standard-version": "^9.3.2",
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.4.0",
     "tsc": "^2.0.0",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.4"
   }
 }
