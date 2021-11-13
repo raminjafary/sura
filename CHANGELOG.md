@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/raminjafary/sura/compare/v0.1.7...v0.1.8) (2021-11-13)
+
+
+### Bug Fixes
+
+* make request payload  optional ([6599acc](https://github.com/raminjafary/sura/commit/6599accf1dfc2f3d26ed202e1f072036d7d4a51e))
+
 ### [0.1.7](https://github.com/raminjafary/sura/compare/v0.1.6...v0.1.7) (2021-11-13)
 
 
