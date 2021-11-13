@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/raminjafary/sura/compare/v0.1.6...v0.1.7) (2021-11-13)
+
+
+### Bug Fixes
+
+* add missing route and request options for playwright ([76effb9](https://github.com/raminjafary/sura/commit/76effb9616f35d3c73a3f3c7e9355708924aad56))
+
 ### [0.1.6](https://github.com/raminjafary/sura/compare/v0.1.5...v0.1.6) (2021-11-11)
 
 
