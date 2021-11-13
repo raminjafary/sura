@@ -1,4 +1,4 @@
-import { chromium, Page } from 'playwright'
+import { chromium, Page, Route, Request } from 'playwright'
 import sass from 'sass'
 
 interface FileOutput {
@@ -10,11 +10,14 @@ type Parameters<T> = T extends (...args: infer T) => any ? T : never
 
 export interface FileOptions {
   type: 'screenshot' | 'pdf'
-  htmlPath?: string | undefined
-  stylePath?: string | undefined
+  htmlPath?: string
+  endpoint?: string
+  stylePath?: string
   pdf?: Parameters<Page['pdf']>[0]
   screenshot?: Parameters<Page['screenshot']>[0]
   pageLoad?: Parameters<Page['goto']>[1]
+  routeOptions?: Parameters<Route['continue']>[0]
+  request: Request
 }
 
 export async function generateFile(options: FileOptions): Promise<FileOutput> {
@@ -25,6 +28,9 @@ export async function generateFile(options: FileOptions): Promise<FileOutput> {
     pdf,
     screenshot,
     pageLoad,
+    request = {},
+    routeOptions,
+    endpoint,
   } = options
 
   if (!htmlPath) {
@@ -37,6 +43,10 @@ export async function generateFile(options: FileOptions): Promise<FileOutput> {
   })
 
   const page = await browser.newPage({ viewport: null })
+
+  if (endpoint) {
+    await page.route(endpoint, (route) => route.continue(routeOptions), request)
+  }
 
   await page.goto(htmlPath, pageLoad)
 
