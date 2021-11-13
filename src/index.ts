@@ -17,7 +17,7 @@ export interface FileOptions {
   screenshot?: Parameters<Page['screenshot']>[0]
   pageLoad?: Parameters<Page['goto']>[1]
   routeOptions?: Parameters<Route['continue']>[0]
-  request: Request
+  request?: Request
 }
 
 export async function generateFile(options: FileOptions): Promise<FileOutput> {
